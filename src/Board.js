@@ -109,6 +109,16 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      var found = 0;
+      var n = this.get('n');
+      for(var i = 0; i < n; i++) {
+        if (this.get(i)[colIndex] === 1) {
+          found += 1;
+          if (found === 2) {
+            return true;
+          }
+        }
+      }
       return false; // fixme
     },
 
