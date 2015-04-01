@@ -139,6 +139,17 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      var found = 0;
+      var n = this.get('n');
+      for(var row = majorDiagonalColumnIndexAtFirstRow, col = 0; row < n; row++, col++) {
+        if (this.get(row)[col] === 1) {
+          found += 1;
+          if (found === 2) {
+            return true;
+          }
+        }
+      
+      }
       return false; // fixme
     },
 
