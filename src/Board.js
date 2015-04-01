@@ -157,9 +157,10 @@
     hasAnyMajorDiagonalConflicts: function() {
       var n = this.get('n');
       var conflicts = false;
-      
-
-      return false; // fixme
+      for (var diagnolColIndex = 0; diagnolColIndex < n; diagnolColIndex++) {
+        conflicts = conflicts || this.hasMajorDiagonalConflictAt(diagnolColIndex);
+      }
+      return conflicts; // fixme
     },
 
 
