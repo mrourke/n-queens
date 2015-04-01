@@ -124,7 +124,12 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      var n = this.get('n');
+      conflicts = false;
+      for(var i = 0; i < n; i++) {
+        conflicts = conflicts || this.hasColConflictAt(i);
+      }
+      return conflicts; // fixme
     },
 
 
