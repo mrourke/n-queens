@@ -157,8 +157,8 @@
     hasAnyMajorDiagonalConflicts: function() {
       var n = this.get('n');
       var conflicts = false;
-      for (var diagnolColIndex = 0; diagnolColIndex < n; diagnolColIndex++) {
-        conflicts = conflicts || this.hasMajorDiagonalConflictAt(diagnolColIndex);
+      for (var diagonalColIndex = 0; diagonalColIndex < n; diagonalColIndex++) {
+        conflicts = conflicts || this.hasMajorDiagonalConflictAt(diagonalColIndex);
       }
       return conflicts; // fixme
     },
@@ -172,7 +172,7 @@
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
       var found = 0;
       var n = this.get('n');
-      for(var row = 0, col = majorDiagonalColumnIndexAtFirstRow; row >= 0; row--, col++) {
+      for(var row = 0, col = minorDiagonalColumnIndexAtFirstRow; row < n; row++, col--) {
         if (this.get(row)[col] === 1) {
           found += 1;
           if (found === 2) {
@@ -185,7 +185,12 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      var n = this.get('n');
+      var conflicts = false;
+      for (var diagonalColIndex = 0; diagonalColIndex < n; diagonalColIndex++) {
+        conflicts = conflicts || this.hasMinorDiagonalConflictAt(diagonalColIndex);
+      }
+      return conflicts; // fixme
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
