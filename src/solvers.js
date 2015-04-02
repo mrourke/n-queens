@@ -38,23 +38,21 @@ window.countNRooksSolutions = function(n) {
   var board = new Board({'n': n});
 
   var rookSolutionFinder = function(rowIndex) {
+    rowIndex = rowIndex || 0;
     for(var colIndex = 0; colIndex < n; colIndex++) {
       if (colIndex > 0) {
-        this.togglePiece(rowIndex, colIndex-1);
+        board.togglePiece(rowIndex, colIndex-1);
       }
-      this.togglePiece(rowIndex, colIndex);
-      if (this.hasAnyRookConflicts()) {   //Optimizies out depth searches on early conflicts
-        return ;
-      }
-      if (rowIndex === n - 1 && !this.hasAnyRookConflicts()) { //rook in each row and no conflicts tally a solution
+      board.togglePiece(rowIndex, colIndex);
+      if (rowIndex === n - 1 && !board.hasAnyRooksConflicts()) { //rook in each row and no conflicts tally a solution
         solutionCount += 1;
       }
-      if (rowIndex < n - 1) {   //Search deeper on rows before the last
-        this.rookSolutionFinder(rowIndex+1);
+      if (rowIndex < n - 1 && !board.hasAnyRooksConflicts()) {   //Search deeper on rows before the last
+        rookSolutionFinder(rowIndex+1);
       }
     }
   }
-  rookSolutionFinder();
+  rookSolutionFinder(0);
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
 };
