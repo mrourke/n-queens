@@ -47,8 +47,11 @@ window.countNRooksSolutions = function(n) {
       if (rowIndex === n - 1 && !board.hasAnyRooksConflicts()) { //rook in each row and no conflicts tally a solution
         solutionCount += 1;
       }
-      if (rowIndex < n - 1 && !board.hasAnyRooksConflicts()) {   //Search deeper on rows before the last
+      if (rowIndex < n - 1 ) {   //&& !board.hasAnyRooksConflicts()Search deeper on rows before the last
         rookSolutionFinder(rowIndex+1);
+      }
+      if (colIndex === n - 1) {
+        board.togglePiece(rowIndex, colIndex);
       }
     }
   }
