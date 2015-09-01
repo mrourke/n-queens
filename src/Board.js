@@ -89,7 +89,7 @@
           }
         }
       }
-      return false; // fixme
+      return false;
     },
 
     // test if any rows on this board contain conflicts
@@ -97,9 +97,9 @@
       var n = this.get('n');
       var conflicts = false;
       for(var i = 0; i < n; i++) {
-        conflicts = conflicts || this.hasRowConflictAt(i);  //optimize break on true
+        conflicts = conflicts || this.hasRowConflictAt(i); 
       }
-      return conflicts; // fixme
+      return conflicts;
     },
 
 
@@ -119,7 +119,7 @@
           }
         }
       }
-      return false; // fixme
+      return false;
     },
 
     // test if any columns on this board contain conflicts
@@ -127,9 +127,9 @@
       var n = this.get('n');
       var conflicts = false;
       for(var i = 0; i < n; i++) {
-        conflicts = conflicts || this.hasColConflictAt(i); // optimize break on true
+        conflicts = conflicts || this.hasColConflictAt(i);
       }
-      return conflicts; // fixme
+      return conflicts;
     },
 
 
@@ -150,7 +150,7 @@
         }
 
       }
-      return false; // fixme
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
@@ -160,7 +160,7 @@
       for (var diagonalColIndex = 0; diagonalColIndex < n; diagonalColIndex++) {
         conflicts = conflicts || this.hasMajorDiagonalConflictAt(diagonalColIndex);
       }
-      return conflicts; // fixme
+      return conflicts;
     },
 
 
@@ -180,7 +180,7 @@
           }
         }
       }
-      return false; // fixme
+      return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
@@ -190,7 +190,7 @@
       for (var diagonalColIndex = 0; diagonalColIndex < n; diagonalColIndex++) {
         conflicts = conflicts || this.hasMinorDiagonalConflictAt(diagonalColIndex);
       }
-      return conflicts; // fixme
+      return conflicts;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
