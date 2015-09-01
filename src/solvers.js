@@ -15,7 +15,7 @@
 // with n rooks placed such that none of them can attack each other
 
 window.findNRooksSolution = function(n) {
-  var solution = new Board({'n':n}); //fixme
+  var solution = new Board({'n':n});
   for (var rook = 0; rook < n; rook++) {
     solution.togglePiece(rook,rook)
   }
