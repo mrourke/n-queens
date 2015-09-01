@@ -33,32 +33,47 @@ window.findNRooksSolution = function(n) {
 
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
-window.countNRooksSolutions = function(n) {
-  var solutionCount = 0; //fixme
-  var board = new Board({'n': n});
+window.countNRooksSolutions = function(n, board, rowIndex) {
+  var solutionCount = 0;
+  board = board || new Board({'n': n});
+  rowIndex = rowIndex || 0;
 
-  var rookSolutionFinder = function(rowIndex) {
-    rowIndex = rowIndex || 0;
-    for(var colIndex = 0; colIndex < n; colIndex++) {
-      if (colIndex > 0) {
-        board.togglePiece(rowIndex, colIndex-1);
-      }
-      board.togglePiece(rowIndex, colIndex);
-      if (rowIndex === n - 1 && !board.hasAnyRooksConflicts()) { //rook in each row and no conflicts tally a solution
-        solutionCount += 1;
-        board.displayBoard;
-      }
-      if (rowIndex < n - 1 && !board.hasAnyRooksConflicts()) {   //Search deeper on rows before the last AND huge optimization
-        rookSolutionFinder(rowIndex+1);
-      }
-      if (colIndex === n - 1) {
-        board.togglePiece(rowIndex, colIndex);
-      }
+  for (var columnIndex = 0; columnIndex < n; columnIndex++) {
+    board.togglePiece(rowIndex, columnIndex);
+    if (rowIndex === n - 1 && !board.hasAnyRooksConflicts()) {
+      solutionCount += 1;
+    } else if (!board.hasAnyRooksConflicts()) {
+      solutionCount += countNRooksSolutions(n, board, rowIndex + 1);
     }
+    board.togglePiece(rowIndex, columnIndex);
   }
-  rookSolutionFinder(0);
-  console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
+
+  if (rowIndex === 0) {
+    console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
+  }
   return solutionCount;
+  // var rookSolutionFinder = function(rowIndex) {
+  //   rowIndex = rowIndex || 0;
+  //   for(var colIndex = 0; colIndex < n; colIndex++) {
+  //     if (colIndex > 0) {
+  //       board.togglePiece(rowIndex, colIndex-1);
+  //     }
+  //     board.togglePiece(rowIndex, colIndex);
+  //     if (rowIndex === n - 1 && !board.hasAnyRooksConflicts()) { //rook in each row and no conflicts tally a solution
+  //       solutionCount += 1;
+  //       board.displayBoard;
+  //     }
+  //     if (rowIndex < n - 1 && !board.hasAnyRooksConflicts()) {   //Search deeper on rows before the last AND huge optimization
+  //       rookSolutionFinder(rowIndex+1);
+  //     }
+  //     if (colIndex === n - 1) {
+  //       board.togglePiece(rowIndex, colIndex);
+  //     }
+  //   }
+  // }
+  // rookSolutionFinder(0);
+  // console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
+  // return solutionCount;
 };
 
 
